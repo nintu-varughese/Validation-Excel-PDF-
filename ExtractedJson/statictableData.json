@@ -1,0 +1,76 @@
+{
+  "headers": [
+    "ID",
+    "Name",
+    "Email",
+    "Role",
+    "Department",
+    "Salary"
+  ],
+  "rows": [
+    [
+      "1",
+      "John Doe",
+      "john@example.com",
+      "Manager",
+      "Sales",
+      "$75,000"
+    ],
+    [
+      "2",
+      "Jane Smith",
+      "jane@example.com",
+      "Developer",
+      "IT",
+      "$85,000"
+    ],
+    [
+      "3",
+      "Mike Johnson",
+      "mike@example.com",
+      "Designer",
+      "Marketing",
+      "$65,000"
+    ],
+    [
+      "4",
+      "Sarah Wilson",
+      "sarah@example.com",
+      "Analyst",
+      "Finance",
+      "$70,000"
+    ],
+    [
+      "5",
+      "David Brown",
+      "david@example.com",
+      "Team Lead",
+      "IT",
+      "$90,000"
+    ],
+    [
+      "6",
+      "Lisa Davis",
+      "lisa@example.com",
+      "Coordinator",
+      "HR",
+      "$55,000"
+    ],
+    [
+      "7",
+      "Tom Wilson",
+      "tom@example.com",
+      "Specialist",
+      "Operations",
+      "$68,000"
+    ],
+    [
+      "8",
+      "Amy Chen",
+      "amy@example.com",
+      "Senior Dev",
+      "IT",
+      "$95,000"
+    ]
+  ]
+}

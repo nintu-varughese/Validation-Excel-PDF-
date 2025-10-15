@@ -1,0 +1,17 @@
+{
+  "dynamicTable": {
+    "row": {
+      "name": "New Item",
+      "category": "Electronics",
+      "price": "1200",
+      "stock": "10"
+    }
+  },
+  "screener": {
+    "expectedContent": [
+      "Welcome to Screener",
+      "Click to activate your account",
+      "https://www.screener.in/activate/"
+    ]
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "formData": {
+    "name": "John Doe",
+    "email": "john@example.com",
+    "phone": "1234567890",
+    "text": "Some text",
+    "comment": "This is a test comment."
+  },
+  "itemData": {
+    "itemName": "Sample Item",
+    "price": "100"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "headers": [
+    "ID",
+    "Name",
+    "Category",
+    "Price",
+    "Stock"
+  ],
+  "rows": [
+    [
+      "1",
+      "Sample Item 1",
+      "Electronics",
+      "299.99",
+      "50"
+    ],
+    [
+      "2",
+      "Sample Item 2",
+      "Clothing",
+      "49.99",
+      "100"
+    ],
+    [
+      "3",
+      "New Item",
+      "Books",
+      "29.99",
+      "20"
+    ]
+  ]
+}
