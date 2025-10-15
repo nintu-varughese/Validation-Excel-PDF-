@@ -19,7 +19,7 @@ on:
         type: choice
         default: 'automationDemoSite.spec.ts'
         options:
-         - dynamicTable.spec.ts
+          - dynamicTable.spec.ts
           - formGenerator.spec.ts
           - Screener.spec.ts
           - staticTable.spec.ts
