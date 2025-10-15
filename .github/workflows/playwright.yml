@@ -19,8 +19,10 @@ on:
         type: choice
         default: 'automationDemoSite.spec.ts'
         options:
-          - automationDemoSite.spec.ts
-          - qaplayground.spec.ts
+         - dynamicTable.spec.ts
+          - formGenerator.spec.ts
+          - Screener.spec.ts
+          - staticTable.spec.ts
           - All
 
 jobs:
