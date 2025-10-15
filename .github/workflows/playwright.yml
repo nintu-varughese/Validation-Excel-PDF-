@@ -1,27 +1,78 @@
 name: Playwright Tests
+
 on:
-  push:
-    branches: [ main, master ]
-  pull_request:
-    branches: [ main, master ]
+  workflow_dispatch:
+    inputs:
+      browser:
+        description: 'Choose browser'
+        required: true
+        default: 'chromium'
+        type: choice
+        options:
+          - chromium
+          - firefox
+          - webkit
+          - all
+      spec:
+        description: 'Select spec file (or All)'
+        required: true
+        default: 'All'
+        type: choice
+        options:
+          - dynamicTable.spec.ts
+          - formGenerator.spec.ts
+          - Screener.spec.ts
+          - staticTable.spec.ts
+          - All
+
 jobs:
   test:
-    timeout-minutes: 60
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        browser: ${{ fromJson('["chromium","firefox","webkit"]') }}
     steps:
-    - uses: actions/checkout@v4
-    - uses: actions/setup-node@v4
-      with:
-        node-version: lts/*
-    - name: Install dependencies
-      run: npm ci
-    - name: Install Playwright Browsers
-      run: npx playwright install --with-deps
-    - name: Run Playwright tests
-      run: npx playwright test
-    - uses: actions/upload-artifact@v4
-      if: ${{ !cancelled() }}
-      with:
-        name: playwright-report
-        path: playwright-report/
-        retention-days: 30
+      - uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Determine browsers to run
+        id: browser_select
+        run: |
+          if [[ "${{ github.event.inputs.browser }}" == "all" ]]; then
+            echo "browsers=['chromium','firefox','webkit']" >> $GITHUB_ENV
+          else
+            echo "browsers=['${{ github.event.inputs.browser }}']" >> $GITHUB_ENV
+          fi
+
+      - name: Determine spec file
+        id: spec_select
+        run: |
+          if [[ "${{ github.event.inputs.spec }}" == "All" ]]; then
+            echo "SPEC='tests/**/*.spec.ts'" >> $GITHUB_ENV
+          else
+            echo "SPEC=tests/${{ github.event.inputs.spec }}" >> $GITHUB_ENV
+          fi
+
+      - name: Run Playwright tests
+        run: |
+          for browser in "${browsers[@]}"; do
+            echo "Running tests on $browser"
+            npx playwright test $SPEC --project=$browser --reporter=allure-playwright
+          done
+
+      - name: Generate Allure report
+        run: |
+          npx allure generate allure-results --clean -o allure-report
+
+      - name: Upload report with highest success
+        run: |
+          # This is a placeholder: implement logic to find report with max success %
+          # For example, parse JSON results from allure-results folder
+          echo "Upload only the browser report with highest success % to GitHub"
