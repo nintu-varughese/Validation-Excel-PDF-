@@ -17,12 +17,10 @@ on:
         description: 'Select the spec to run (or All)'
         required: true
         type: choice
-        default: 'windowsandframes.spec.ts'
+        default: 'automationDemoSite.spec.ts'
         options:
-          - dynamicTable.spec.ts
-          - formGenerator.spec.ts
-          - Screener.spec.ts
-          - staticTable.spec.ts
+          - automationDemoSite.spec.ts
+          - qaplayground.spec.ts
           - All
 
 jobs:
@@ -44,26 +42,43 @@ jobs:
       - name: Install Playwright browsers
         run: npx playwright install
 
+      - name: Install Allure CLI and single-file packager
+        run: |
+          npm install -g allure-commandline --save-dev
+          npm install allure-single-html-file-js --save-dev
+
       - name: Run Playwright tests
         run: |
-          # Map Edge browser to msedge project
           if [ "${{ github.event.inputs.browser }}" = "edge" ]; then
             BROWSER_PROJECT="msedge"
           else
             BROWSER_PROJECT="${{ github.event.inputs.browser }}"
           fi
 
-          # Run all specs if "All" selected
           if [ "${{ github.event.inputs.spec }}" = "All" ]; then
             echo "Running all Playwright tests on $BROWSER_PROJECT..."
-            npx playwright test --project=$BROWSER_PROJECT --reporter=html --output=playwright-report
+            npx playwright test --project=$BROWSER_PROJECT --reporter=line,allure-playwright --output=allure-results || true
           else
-            echo "Running tests/${{ github.event.inputs.spec }} on $BROWSER_PROJECT..."
-            npx playwright test tests/${{ github.event.inputs.spec }} --project=$BROWSER_PROJECT --reporter=html --output=playwright-report
+            echo "Running ${{ github.event.inputs.spec }} on $BROWSER_PROJECT..."
+            npx playwright test tests/${{ github.event.inputs.spec }} --project=$BROWSER_PROJECT --reporter=line,allure-playwright --output=allure-results || true
           fi
 
-      - name: Upload Playwright HTML Report
+      - name: Generate Allure HTML Report
+        if: always()
+        run: |
+          mkdir -p allure-report
+          allure generate allure-results --clean -o allure-report
+
+      - name: Combine into Single HTML File
+        if: always()
+        run: |
+          node ./node_modules/allure-single-html-file-js/combine.js allure-report
+          mv allure-report/complete.html allure-report.html
+          echo "✅ Combined Allure HTML generated: allure-report.html"
+
+      - name: Upload Single Allure HTML File
+        if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: playwright-html-report
-          path: playwright-report/
+          name: Allure-Report-Single-File
+          path: allure-report.html
