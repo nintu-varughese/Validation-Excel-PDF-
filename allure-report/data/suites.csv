@@ -1,8 +1,0 @@
-"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
-"","8896","Validate table data in Excel","chromium","Wed Oct 15 10:16:33 IST 2025","passed","Wed Oct 15 10:16:42 IST 2025","Static Table Export Validation","","",""
-"","25078","Register on Screener.in and verify email content","chromium","Wed Oct 15 10:16:32 IST 2025","failed","Wed Oct 15 10:16:57 IST 2025","","","",""
-"","15120","Add row and verify in exported PDF","chromium","Wed Oct 15 10:16:33 IST 2025","passed","Wed Oct 15 10:16:48 IST 2025","","","",""
-"","5720","Validate table data in PDF","chromium","Wed Oct 15 10:16:43 IST 2025","passed","Wed Oct 15 10:16:49 IST 2025","Static Table Export Validation","","",""
-"","15387","Verify name and email are present in PDF","chromium","Wed Oct 15 10:16:33 IST 2025","passed","Wed Oct 15 10:16:48 IST 2025","","","",""
-"","11461","Verify name and email are present in Excel","chromium","Wed Oct 15 10:16:33 IST 2025","passed","Wed Oct 15 10:16:44 IST 2025","","","",""
-"","9968","Add row and verify in exported Excel","chromium","Wed Oct 15 10:16:33 IST 2025","passed","Wed Oct 15 10:16:43 IST 2025","","","",""

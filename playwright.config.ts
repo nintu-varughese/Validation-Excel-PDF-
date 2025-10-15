@@ -26,7 +26,6 @@ reporter: [
     },
   ],
 ],
-
   /* Shared settings for all projects */
   use: {
     //headless: false,             // run in headless mode
